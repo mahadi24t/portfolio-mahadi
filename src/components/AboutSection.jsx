@@ -37,7 +37,7 @@ export const AboutSection = () => {
   ];
 
   const tabContent = {
-    personal: "I am a passionate Computer Science student at ULAB, previously as the President of the Computer Programming Club. When I'm not training AI models or building web apps, I'm organizing tech workshops and mentoring junior developers.",
+    personal: "AI Engineer and Web Developer with a robust foundation in NLP and Deep Learning. Skilled at executing end-to-endtechnical lifecycles ranging from fine-tuning RAG-augmented LLMs to deploying scalable React applications. Proven leader capable of driving research innovation and fostering technical communities as the former President of the ULAB Computer Programming Club.",
     professional: "As an AI Engineer and Web Developer, I specialize in fine-tuning Large Language Models (LLMs) and building RAG-based systems. I have published research on misinformation detection and developed scalable React applications.",
     approach: "I combine academic rigor with practical engineering. Whether it's optimizing a React frontend or designing a hybrid CNN-LSTM model for stock forecasting, I focus on scalability, efficiency, and real-world impact."
   };
