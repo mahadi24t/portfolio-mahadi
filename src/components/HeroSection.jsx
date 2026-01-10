@@ -28,7 +28,7 @@ export const HeroSection = () => {
 
   // CUSTOMIZED: Your Stats (Approximate from CV)
   const achievements = [
-    { number: "2+", label: "Research Papers", icon: <Shield className="h-3 w-3" /> },
+    { number: "3+", label: "Research Papers", icon: <Shield className="h-3 w-3" /> },
     { number: "15+", label: "Projects Built", icon: <TrendingUp className="h-3 w-3" /> },
     { number: "200+", label: "Problems Solved", icon: <Award className="h-3 w-3" /> },
     { number: "100+", label: "Community Members", icon: <Users className="h-3 w-3" /> }

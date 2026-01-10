@@ -10,7 +10,7 @@ export const AboutSection = () => {
   // Updated Data from CV
   const achievements = [
     { number: "15+", label: "Projects", icon: <Briefcase className="h-5 w-5" />, suffix: "" },
-    { number: "2", label: "Research Articles", icon: <Code className="h-5 w-5" />, suffix: "+" }, // Updated based on published research
+    { number: "3", label: "Research Articles", icon: <Code className="h-5 w-5" />, suffix: "+" }, // Updated based on published research
     { number: "200", label: "Problems Solved", icon: <Target className="h-5 w-5" />, suffix: "+" }, // Beecrowd/LeetCode stats
     { number: "100", label: "Comm. Members", icon: <User className="h-5 w-5" />, suffix: "%" } // Approximate impact as Club President
   ];
