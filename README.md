@@ -1,55 +1,57 @@
-# 🚀 Mahadi's Portfolio
+# ⚡ Md. Mahadi Hasan | AI Engineer & Web Developer
 
-![Portfolio Preview](public/projects/chef-llm.png) 
-A modern, high-performance portfolio website built for **Md. Mahadi Hasan**, an AI Engineer and Full-Stack Developer. This project showcases my research in LLMs, big data pipelines, and scalable web applications.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
 
-## 🔗 Live Demo
-👉 **[mahadih.netlify.app](https://mahadih.netlify.app)**
+<br />
 
----
+![Portfolio Preview](public/preview.png)
 
-## 🛠️ Tech Stack
+<br />
 
-This portfolio is built with a focus on performance, animations, and clean code.
+## 🚀 About The Project
 
-- **Frontend:** React 18, Vite
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
-- **Deployment:** Netlify
+Welcome to the personal portfolio of **Md. Mahadi Hasan**. 
 
----
+This platform serves as a central hub demonstrating my expertise at the intersection of **Artificial Intelligence** and **Modern Web Engineering**. It showcases my research in Large Language Models (LLMs), big data pipelines using Apache Spark, and scalable full-stack applications.
 
-## ✨ Features
+Designed with a focus on performance and aesthetics, the site features a custom-built dark mode, smooth framer-motion animations, and a fully responsive layout.
 
-- **⚡ Fast & Responsive:** Built with Vite and Tailwind for lightning-fast load times and perfect mobile responsiveness.
-- **🎨 Dynamic Animations:** Smooth entrance and scroll animations using Framer Motion.
-- **🛠️ Skill Showcase:** Interactive skills section categorizing expertise in AI, Web, and Tools.
-- **📂 Project Gallery:** Filterable project section highlighting my work in AI/ML, E-commerce, and SaaS.
-- **📱 Contact Integration:** Fully functional contact form (powered by Formspree) and direct social links.
+### 🔗 **Live Demo:** [mahadih.netlify.app](https://mahadih.netlify.app)
 
 ---
 
-## 📂 Featured Projects
+## 🛠️ Technical Stack
 
-| Project | Category | Tech Stack |
-| :--- | :--- | :--- |
-| **Chef-LLM** | AI & Web | React, Perplexity AI, Vite |
-| **Stock Forecasting** | Big Data & ML | Apache Spark, LSTM, Python |
-| **Pyramid Tie** | E-commerce | HTML5, CSS3, JavaScript |
-| **Higgs Boson PCA** | Big Data | Spark MLlib, PySpark |
-| **LeadHarvest** | Web Extension | JavaScript, Chrome API |
+I utilized a modern, component-driven architecture to ensure scalability and maintainability.
+
+| Category | Technologies |
+| :--- | :--- |
+| **Frontend Core** | React 18, Vite, JavaScript (ES6+) |
+| **Styling & UI** | Tailwind CSS, Lucide React Icons |
+| **Animations** | Framer Motion (Complex gestures & scroll reveals) |
+| **Form Handling** | React Hook Form + Formspree |
+| **Deployment** | Netlify (CI/CD Pipeline) |
 
 ---
 
-## 🚀 Getting Started
+## 📂 Research & Projects
 
-Follow these steps to run the project locally on your machine.
+Key highlights from my work in AI and Software Engineering:
 
-### Prerequisites
-Make sure you have **Node.js** installed.
+- **Chef-LLM:** An AI-powered culinary assistant using RAG and Perplexity AI.
+- **Stock Market Forecasting:** A Hybrid CNN-LSTM model trained on 1.4M news headlines and historical stock data using Apache Spark.
+- **Bengali Misinformation Detection:** A multimodal framework leveraging LLMs to detect fake news in low-resource languages (Published IEEE Paper).
+- **High-Performance Architectures:** Experience with Scalable PCA on 11M+ record datasets (Higgs Boson).
 
-### Installation
+---
+
+## 💻 Getting Started locally
+
+If you wish to explore the codebase or run a local version:
 
 1. **Clone the repository**
    ```bash
