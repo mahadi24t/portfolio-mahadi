@@ -72,7 +72,7 @@ export const ContactSection = () => {
     
     try {
       // NOTE: You need to create a new form at formspree.io and replace this ID 'xwpbojaj' with yours to receive emails.
-      const response = await fetch('https://formspree.io/f/xwpbojaj', {
+      const response = await fetch('https://formspree.io/f/mqeezjlv', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
