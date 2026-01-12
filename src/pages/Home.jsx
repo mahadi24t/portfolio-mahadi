@@ -7,6 +7,7 @@ import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import { TestimonialSection } from "../components/Testimonial";
+import { FloatingChat } from "../components/FloatingChat";
 
 export const Home = () => {
   return (
@@ -30,6 +31,7 @@ export const Home = () => {
 
       {/* Footer */}
       <Footer />
+      <FloatingChat />
     </div>
   );
 };
