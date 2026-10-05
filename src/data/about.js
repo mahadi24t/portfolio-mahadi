@@ -37,7 +37,15 @@ export const techStack = [
   },
   {
     category: "Web Engineering",
-    items: ["React 18", "Next.js", "Tailwind CSS", "JavaScript (ES6+)", "HTML5 / CSS3", "PHP"]
+    items: [
+      "Next.js (Full-Stack / App Router)",
+      "React 18 / 19",
+      "TypeScript",
+      "Node.js",
+      "Express.js",
+      "Tailwind CSS",
+      "JavaScript (ES6+)"
+    ]
   },
   {
     category: "Data & Systems",
@@ -60,6 +68,9 @@ export const tabContent = {
 
   professional:
     "Operating at the intersection of data-driven intelligence and AI systems engineering. As an Associate Business Intelligence Analyst at CS Meta Limited, I engineer enterprise web infrastructure and LLM-driven evaluation platforms, while actively designing cutting-edge NLP/LLM pipelines and co-authoring peer-reviewed academic papers as a Research Assistant at Vector Research Lab.",
+
+  leadership:
+    "Former President and Publication Secretary of the ULAB Computer Programming Club. Orchestrated 'Coderhunt'—driving a 5x surge in university-wide competitive programmers—and established strategic industry partnerships and MOUs with Robi Axiata, Creative IT, BongoDev, Programming Hero, and Data Station 360.",
 
   approach:
     "I bridge the gap between peer-reviewed academic AI research and resilient production engineering. From designing zero-hallucination RAG pipelines with sub-millisecond database concurrency safeguards to engineering distributed big data pipelines, my approach prioritizes deterministic reliability, auditability, and measurable real-world utility.",

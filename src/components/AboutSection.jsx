@@ -1,17 +1,38 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Code, User, Download, Sparkles, Target, Github, Linkedin, Mail, Star } from 'lucide-react';
+import {
+  Briefcase,
+  Code,
+  User,
+  Download,
+  Sparkles,
+  Target,
+  Github,
+  Linkedin,
+  Mail,
+  Star,
+  Trophy,
+  Award,
+  CheckCircle2,
+  ShieldCheck,
+  Users,
+  GraduationCap
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { aboutStats, techStack, tabContent, coreCompetencies, resumeConfig } from "@/data/about";
+import { aboutStats, techStack, tabContent, coreCompetencies } from "@/data/about";
+import { leadershipExperience } from "@/data/leadership";
+import { certifications, certificationCategories } from "@/data/certifications";
+import { competitiveAchievements } from "@/data/achievements";
 
 const statIconMap = {
   "Projects Built": Briefcase,
   "Research Articles": Code,
   "Problems Solved": Target,
-  "Community Members": User,
+  "Community Members": Users,
 };
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('personal');
+  const [selectedCertCategory, setSelectedCertCategory] = useState('All');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [counter, setCounter] = useState(0);
 
@@ -45,12 +66,16 @@ export const AboutSection = () => {
   // Programmatic download function
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/Mahadi_Hasan_cv.pdf'; // Make sure to rename your PDF file in the public folder to this!
+    link.href = '/Mahadi_Hasan_cv.pdf';
     link.download = 'Mahadi_Hasan_cv.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
+  const filteredCertifications = selectedCertCategory === "All"
+    ? certifications
+    : certifications.filter(cert => cert.category === selectedCertCategory);
 
   return (
     <section id="about" className="relative py-16 md:py-28 px-4 sm:px-6 lg:px-12 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden">
@@ -108,7 +133,7 @@ export const AboutSection = () => {
                   {/* Achievements */}
                   <div className="flex-1 text-center md:text-left">
                     <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">Md. Mahadi Hasan</h2>
-                    <p className="text-primary text-base sm:text-lg font-semibold mb-3 sm:mb-4">AI Engineer & Web Developer</p>
+                    <p className="text-primary text-base sm:text-lg font-semibold mb-3 sm:mb-4">AI Researcher &amp; Systems Engineer</p>
                     <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
                       {achievements.map((achievement, index) => (
                         <div key={index} className={`p-2 sm:p-3 rounded-xl bg-background/50 border border-border transition-all duration-300 hover:scale-105 hover:border-primary/30 ${counter === index ? 'bg-primary/10 border-primary/50' : ''}`}>
@@ -126,12 +151,12 @@ export const AboutSection = () => {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex flex-col sm:flex-row border-b border-border mb-4 sm:mb-6">
-                  {['personal', 'professional', 'approach'].map(tab => (
+                <div className="flex flex-wrap border-b border-border mb-4 sm:mb-6">
+                  {['personal', 'professional', 'leadership', 'approach'].map(tab => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 text-sm sm:text-base font-medium transition-all duration-300 ${activeTab === tab ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                      className={`flex-1 min-w-[100px] py-2 sm:py-3 px-2 sm:px-4 text-xs sm:text-base font-medium transition-all duration-300 ${activeTab === tab ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
                     >
                       {tab.charAt(0).toUpperCase() + tab.slice(1)}
                     </button>
@@ -140,8 +165,8 @@ export const AboutSection = () => {
 
                 {/* Tab Content */}
                 <div className="min-h-[100px] sm:min-h-[120px]">
-                  <AnimatePresence mode="sync">
-                    <motion.p
+                  <AnimatePresence mode="wait">
+                    <motion.div
                       key={activeTab}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -149,8 +174,65 @@ export const AboutSection = () => {
                       transition={{ duration: 0.3 }}
                       className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed"
                     >
-                      {tabContent[activeTab]}
-                    </motion.p>
+                      <p className={activeTab === 'leadership' ? 'mb-4 text-foreground/90' : ''}>
+                        {tabContent[activeTab]}
+                      </p>
+
+                      {/* Leadership Role Highlights inside Leadership Tab */}
+                      {activeTab === 'leadership' && (
+                        <div className="space-y-3 pt-2">
+                          {leadershipExperience.map((role) => (
+                            <div
+                              key={role.id}
+                              className="p-3.5 sm:p-4 rounded-xl bg-background/60 border border-border/80 backdrop-blur-sm transition-all hover:border-primary/30"
+                            >
+                              <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
+                                <span className="font-bold text-foreground text-sm sm:text-base">
+                                  {role.role} —{" "}
+                                  <span className="text-primary font-semibold">
+                                    {role.organization}
+                                  </span>
+                                </span>
+                                <span className="text-xs px-2.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium">
+                                  {role.period}
+                                </span>
+                              </div>
+
+                              {role.badge && (
+                                <span className="inline-block text-[11px] font-semibold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md mb-2 border border-purple-500/20">
+                                  {role.badge}
+                                </span>
+                              )}
+
+                              <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground mb-2">
+                                {role.bulletPoints.map((bp, i) => (
+                                  <li key={i} className="flex items-start gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
+                                    <span>{bp}</span>
+                                  </li>
+                                ))}
+                              </ul>
+
+                              {role.partners && (
+                                <div className="mt-2.5 pt-2 border-t border-border/40 flex flex-wrap items-center gap-1.5">
+                                  <span className="text-[11px] text-muted-foreground font-semibold flex items-center gap-1">
+                                    <Users className="w-3 h-3 text-primary" /> Strategic MOUs:
+                                  </span>
+                                  {role.partners.map((p, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="text-[11px] px-2 py-0.5 rounded-md bg-card border border-border text-foreground/80 font-medium"
+                                    >
+                                      {p}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </motion.div>
                   </AnimatePresence>
                 </div>
               </div>
@@ -174,6 +256,52 @@ export const AboutSection = () => {
                           <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />{item}
                         </div>
                       ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Competitive Programming & Problem Solving Card */}
+            <div className="bg-card/50 border border-border rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:shadow-3xl hover:border-primary/40 hover:bg-card/60">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                <h3 className="text-lg sm:text-2xl font-bold flex items-center gap-2 sm:gap-3">
+                  <Trophy className="h-5 sm:h-6 w-5 sm:w-6 text-amber-400" />
+                  Competitive Programming &amp; Problem Solving
+                </h3>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  <Award className="h-3.5 w-3.5" /> 200+ Solved
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {competitiveAchievements.map((achieve) => (
+                  <div
+                    key={achieve.id}
+                    className="bg-background/50 border border-border rounded-2xl p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-primary/30 hover:scale-[1.02] group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2.5">
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-primary/10 text-primary border border-primary/20">
+                          {achieve.badge}
+                        </span>
+                        {achieve.iconKey === "Trophy" ? (
+                          <Trophy className="h-4 w-4 text-amber-400 group-hover:scale-110 transition-transform" />
+                        ) : achieve.iconKey === "Award" ? (
+                          <Award className="h-4 w-4 text-purple-400 group-hover:scale-110 transition-transform" />
+                        ) : (
+                          <Code className="h-4 w-4 text-blue-400 group-hover:scale-110 transition-transform" />
+                        )}
+                      </div>
+                      <h4 className="font-bold text-sm sm:text-base text-foreground mb-1 group-hover:text-primary transition-colors">
+                        {achieve.title}
+                      </h4>
+                      <p className="text-xs font-medium text-primary/80 mb-2">
+                        {achieve.subtitle}
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {achieve.description}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -244,6 +372,93 @@ export const AboutSection = () => {
                 ⚡ Response time: Under 24 hours
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Professional Certifications & Accreditations Showcase */}
+        <div className="mt-12 md:mt-16 bg-card/50 border border-border rounded-3xl p-6 sm:p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+          {/* Subtle glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 relative z-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold mb-2">
+                <ShieldCheck className="h-3.5 w-3.5" /> VERIFIED ACCREDITATIONS
+              </div>
+              <h3 className="text-xl sm:text-3xl font-bold">
+                Professional Certifications &amp; Accreditations
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl">
+                Verified industry certifications spanning Machine Learning, Data Analytics, Full-Stack Engineering, and Technical Infrastructure.
+              </p>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2">
+              {certificationCategories.map((cat) => {
+                const count = cat === "All"
+                  ? certifications.length
+                  : certifications.filter(c => c.category === cat).length;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCertCategory(cat)}
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 ${
+                      selectedCertCategory === cat
+                        ? "bg-primary text-primary-foreground shadow-md shadow-primary/25 scale-102"
+                        : "bg-background/60 text-muted-foreground hover:text-foreground hover:bg-background border border-border"
+                    }`}
+                  >
+                    <span>{cat}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                      selectedCertCategory === cat
+                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
+                    }`}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Grid of Certifications */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 relative z-10">
+            {filteredCertifications.map((cert) => (
+              <div
+                key={cert.id}
+                className="bg-background/50 hover:bg-background/80 border border-border/80 hover:border-primary/40 rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${
+                      cert.category === "AI/ML & Data Science"
+                        ? "bg-purple-500/10 text-purple-400 border-purple-500/20"
+                        : cert.category === "Web Development"
+                        ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                        : "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                    }`}>
+                      {cert.category}
+                    </span>
+                    <span className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-500" /> Verified
+                    </span>
+                  </div>
+
+                  <h4 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors leading-snug mb-2">
+                    {cert.title}
+                  </h4>
+                </div>
+
+                <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
+                  <span className="font-semibold text-foreground/80">{cert.issuer}</span>
+                  <span className="text-[10px] text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-full font-medium">
+                    Certificate
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
