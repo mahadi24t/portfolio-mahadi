@@ -1,6 +1,14 @@
-import { ArrowDown, MousePointerClick, Sparkles, Code, Palette, Rocket, Award, Download, Calendar, Shield, Zap, Users, TrendingUp, Briefcase, Mail } from "lucide-react";
+import { MousePointerClick, Code, Award, Download, Shield, Users, TrendingUp, Briefcase, Mail } from "lucide-react";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
+import { heroBio, codeSnippets, heroStats } from "@/data/hero";
+
+const statIconMap = {
+  Shield: Shield,
+  TrendingUp: TrendingUp,
+  Award: Award,
+  Users: Users
+};
 
 export const HeroSection = () => {
   const ref = useRef(null);
@@ -8,31 +16,29 @@ export const HeroSection = () => {
   const [currentCodeLine, setCurrentCodeLine] = useState(0);
   const [displayedCode, setDisplayedCode] = useState("");
 
-  // CUSTOMIZED: Your Code Snippet
-  const codeSnippets = [
-    "import { AIEngineer } from 'mahadi.dev';",
-    "",
-    "const mahadi = new AIEngineer({",
-    "  name: 'Md. Mahadi Hasan',",
-    "  skills: ['LLMs', 'RAG', 'Python', 'React', 'NLP'],",
-    "  focus: 'Fine-tuning LLMs & Scalable Web Apps',",
-    "  status: 'Ready to Innovate'",
-    "});",
-    "",
-    "await mahadi.trainModel();",
-    "// Featured: Fact-Checking AI, Misinformation Detection",
-    "",
-    "mahadi.deploy();",
-    "console.log('🚀 Building the future with AI!');"
-  ];
+  const achievements = useMemo(() => {
+    return heroStats.map(stat => {
+      const IconComponent = statIconMap[stat.iconKey] || Award;
+      return {
+        ...stat,
+        icon: <IconComponent className="h-3 w-3" />
+      };
+    });
+  }, []);
 
-  // CUSTOMIZED: Your Stats (Approximate from CV)
-  const achievements = [
-    { number: "3+", label: "Research Papers", icon: <Shield className="h-3 w-3" /> },
-    { number: "15+", label: "Projects Built", icon: <TrendingUp className="h-3 w-3" /> },
-    { number: "200+", label: "Problems Solved", icon: <Award className="h-3 w-3" /> },
-    { number: "100+", label: "Community Members", icon: <Users className="h-3 w-3" /> }
-  ];
+  const particles = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      width: Math.random() * 60 + 20,
+      height: Math.random() * 60 + 20,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      rotate: Math.random() * 360,
+      yOffset: (Math.random() - 0.5) * 60,
+      xOffset: (Math.random() - 0.5) * 40,
+      duration: Math.random() * 6 + 4,
+    }));
+  }, []);
 
   useEffect(() => {
     const currentLine = codeSnippets[currentCodeLine];
@@ -57,7 +63,7 @@ export const HeroSection = () => {
 
   const handleViewResume = () => {
     // Open resume in new tab (Ensure file name matches public folder)
-    window.open('/Mahadi_Hasan_cv.pdf', '_blank', 'noopener,noreferrer');
+    window.open(heroBio.resumePath || '/Mahadi_Hasan_cv.pdf', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -68,25 +74,25 @@ export const HeroSection = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
         </div>
         
-        {[...Array(12)].map((_, i) => (
+        {particles.map((p) => (
           <motion.div
-            key={i}
+            key={p.id}
             className="absolute bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-lg"
             style={{
-              width: Math.random() * 60 + 20 + 'px',
-              height: Math.random() * 60 + 20 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              rotate: Math.random() * 360
+              width: `${p.width}px`,
+              height: `${p.height}px`,
+              left: `${p.left}%`,
+              top: `${p.top}%`,
+              rotate: p.rotate
             }}
             animate={{
-              y: [0, (Math.random() - 0.5) * 60],
-              x: [0, (Math.random() - 0.5) * 40],
+              y: [0, p.yOffset],
+              x: [0, p.xOffset],
               opacity: [0.1, 0.25, 0.1],
               scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: Math.random() * 6 + 4,
+              duration: p.duration,
               repeat: Infinity,
               repeatType: 'reverse',
             }}
@@ -102,18 +108,18 @@ export const HeroSection = () => {
           
           <div className="flex-1 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <motion.div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8 backdrop-blur-sm" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              <Briefcase className="h-4 w-4" /> AI Engineer & Web Developer
+              <Briefcase className="h-4 w-4" /> {heroBio.title}
             </motion.div>
 
             <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              <span className="block text-foreground">I'm Mahadi</span>
+              <span className="block text-foreground">{heroBio.greeting} {heroBio.shortName}</span>
               <motion.span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent mt-2" animate={{ backgroundPosition: ['0%', '100%', '0%'] }} transition={{ duration: 8, repeat: Infinity }} style={{ backgroundSize: '200% 100%' }}>
-                Engineering Intelligence
+                {heroBio.headline}
               </motion.span>
             </motion.h1>
 
             <motion.p className="text-lg sm:text-xl text-muted-foreground mt-6 leading-relaxed max-w-2xl" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
-              I build <span className="text-primary font-semibold">AI-powered systems</span> and scalable web applications. Specializing in Large Language Models (LLMs), RAG, and React to solve real-world problems.
+              I build <span className="text-primary font-semibold">{heroBio.highlightedFocus}</span> and scalable web applications. Specializing in Large Language Models (LLMs), RAG, and React to solve real-world problems.
             </motion.p>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-8" variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8 } } }}>
@@ -169,7 +175,7 @@ export const HeroSection = () => {
                     <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
                   </div>
                   <div className="flex-1 text-center">
-                    <div className="text-sm font-mono font-semibold text-muted-foreground">ai_engineer.py</div>
+                    <div className="text-sm font-mono font-semibold text-muted-foreground">ai_engineer.ts</div>
                   </div>
                   <div className="w-4 h-4 bg-green-400/20 rounded-full animate-pulse"></div>
                 </div>

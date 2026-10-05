@@ -2,36 +2,39 @@ import { Navbar } from "../components/Navbar";
 import { StarBackground } from "@/components/StarBackground";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
-import { SkillsSection } from "../components/SkillsSection";
+import { ExperienceSection } from "../components/ExperienceSection";
+import { PublicationsSection } from "../components/PublicationsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
+import { SkillsSection } from "../components/SkillsSection";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
-import { TestimonialSection } from "../components/Testimonial";
 import { FloatingChat } from "../components/FloatingChat";
 
 export const Home = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Theme Toggle */}
-      {/* Background Effects */}
+      {/* Ambient Star Background */}
       <StarBackground />
 
-      {/* Navbar */}
+      {/* Top Floating Navbar & Floating Dock */}
       <Navbar />
-      {/* Main Content */}
+
+      {/* Main Narrative Sections Flow */}
       <main>
         <HeroSection />
         <AboutSection />
-        <SkillsSection />
+        <ExperienceSection />
+        <PublicationsSection />
         <ProjectsSection />
-        <TestimonialSection />
+        <SkillsSection />
         <ContactSection />
-        
       </main>
 
-      {/* Footer */}
+      {/* Footer & Chat Widget */}
       <Footer />
       <FloatingChat />
     </div>
   );
 };
+
+export default Home;

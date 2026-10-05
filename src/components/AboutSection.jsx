@@ -1,46 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Briefcase, Code, User, Download, Calendar, Sparkles, Target, Github, Linkedin, Twitter, Mail, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Briefcase, Code, User, Download, Sparkles, Target, Github, Linkedin, Mail, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { aboutStats, techStack, tabContent, coreCompetencies, resumeConfig } from "@/data/about";
+
+const statIconMap = {
+  "Projects Built": Briefcase,
+  "Research Articles": Code,
+  "Problems Solved": Target,
+  "Community Members": User,
+};
 
 export const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('personal');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [counter, setCounter] = useState(0);
 
-  // Updated Data from CV
-  const achievements = [
-    { number: "15+", label: "Projects", icon: <Briefcase className="h-5 w-5" />, suffix: "" },
-    { number: "3", label: "Research Articles", icon: <Code className="h-5 w-5" />, suffix: "+" }, // Updated based on published research
-    { number: "200", label: "Problems Solved", icon: <Target className="h-5 w-5" />, suffix: "+" }, // Beecrowd/LeetCode stats
-    { number: "100", label: "Comm. Members", icon: <User className="h-5 w-5" />, suffix: "%" } // Approximate impact as Club President
-  ];
+  const achievements = aboutStats.map((stat) => {
+    const IconComponent = statIconMap[stat.label] || Briefcase;
+    return {
+      ...stat,
+      icon: <IconComponent className="h-5 w-5" />
+    };
+  });
 
-  const techStack = [
-    { category: "AI & ML", items: ["LLMs/RAG", "NLP", "PyTorch/TensorFlow", "Deep Learning", "Python"] },
-    { category: "Web Dev", items: ["React", "Tailwind", "JavaScript", "HTML/CSS", "PHP"] },
-    { category: "Tools", items: ["Git/GitHub", "Docker", "Apache Spark", "Latex", "Netlify"] }
-  ];
-
-  const features = [
-    "AI & LLM Research", 
-    "Full-Stack Development", 
-    "Data Science & Analytics", 
-    "Leadership & Mentoring", 
-    "Competitive Programming", 
-    "Research Writing"
-  ];
+  const features = coreCompetencies;
 
   const socialLinks = [
     { icon: <Github className="h-5 w-5" />, href: "https://github.com/mahadi24t" },
     { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com/in/mahadi24/" },
     { icon: <Mail className="h-5 w-5" />, href: "mailto:mahaditm249@gmail.com" }
   ];
-
-  const tabContent = {
-    personal: "AI Engineer and Web Developer with a robust foundation in NLP and Deep Learning. Skilled at executing end-to-endtechnical lifecycles ranging from fine-tuning RAG-augmented LLMs to deploying scalable React applications. Proven leader capable of driving research innovation and fostering technical communities as the former President of the ULAB Computer Programming Club.",
-    professional: "As an AI Engineer and Web Developer, I specialize in fine-tuning Large Language Models (LLMs) and building RAG-based systems. I have published research on misinformation detection and developed scalable React applications.",
-    approach: "I combine academic rigor with practical engineering. Whether it's optimizing a React frontend or designing a hybrid CNN-LSTM model for stock forecasting, I focus on scalability, efficiency, and real-world impact."
-  };
 
   useEffect(() => {
     const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });

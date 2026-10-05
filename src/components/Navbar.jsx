@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useTheme } from "next-themes";
 import {
   Home,
   User,
@@ -12,38 +13,48 @@ import {
   Github,
   Linkedin,
   Globe,
-  MessageSquare
+  BookOpen,
+  Layers
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// CUSTOMIZED: Added "Testimonials" back in
 const navItems = [
   { name: "Home", href: "#hero", icon: Home },
   { name: "About", href: "#about", icon: User },
+  { name: "Experience", href: "#experience", icon: Briefcase },
+  { name: "Research", href: "#publications", icon: BookOpen },
+  { name: "Projects", href: "#projects", icon: Layers },
   { name: "Skills", href: "#skills", icon: Code },
-  { name: "Projects", href: "#projects", icon: Briefcase },
-  { name: "Testimonials", href: "#testimonials", icon: MessageSquare }, // Added back
   { name: "Contact", href: "#contact", icon: Mail },
 ];
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState("light");
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "dark") {
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-    }
+    setMounted(true);
   }, []);
 
+  const currentTheme = theme === "system" ? resolvedTheme : theme;
+  const isDark = currentTheme === "dark";
+
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", newTheme);
-    setTheme(newTheme);
+    setTheme(isDark ? "light" : "dark");
   };
+
+  if (!mounted) {
+    return (
+      <button
+        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors opacity-0"
+        title="Toggle theme"
+        aria-label="Toggle theme"
+      >
+        <Moon className="w-5 h-5" />
+      </button>
+    );
+  }
 
   return (
     <button
@@ -52,7 +63,7 @@ const ThemeToggle = () => {
       title="Toggle theme"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
     </button>
   );
 };
